@@ -16,16 +16,16 @@ class SspanelQd(object):
     def __init__(self):
         ###############登录信息配置区###############
         # 机场地址
-        self.base_url = 'http://****'
+        self.base_url = '机场地址'
         # 登录信息
-        self.email = '*******@qq.com'
-        self.password = 'x******'
+        self.email = '账号'
+        self.password = '密码'
         ###########################################
         ##############推送渠道配置区###############
         # 酷推qq推送
         self.ktkey = ''
-        # ServerTurbo推送
-        self.SendKey = ''
+        # bark推送
+        self.SendKey = ''   # “https://api.day.app/43CRYqupPVYr7DyR4TSNh/这里改成你自己的推送内容”,只取“43CRYqupPVYr7DyR4TSNh/”
         # Qmsg私聊推送
         self.QmsgKey = ''
         # Telegram私聊推送
@@ -91,16 +91,12 @@ class SspanelQd(object):
         }
         requests.post(qmsg_url, data=data)
 
-    # Server酱推送
+    # bark推送
     def server_send(self, msg):
         if self.SendKey == '':
             return
-        server_url = "https://sctapi.ftqq.com/" + str(self.SendKey) + ".send"
-        data = {
-            'text': "今日的流量白嫖到啦！",
-            'desp': msg
-        }
-        requests.post(server_url, data=data)
+        server_url = "https://api.day.app/" + str(self.SendKey) + str(msg)
+        requests.get(server_url)
 
     # 酷推QQ推送
     def kt_send(self, msg):
